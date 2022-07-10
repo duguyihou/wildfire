@@ -1,5 +1,5 @@
-import { Application } from '../deps.ts';
-import { appConfig } from './config/configuration.ts'
+import { Application } from "../deps.ts";
+import { appConfig } from "./config/configuration.ts";
 
 const app = new Application();
 
@@ -20,7 +20,7 @@ app.use(async (ctx, next) => {
 
 // Hello wildfire!
 app.use((ctx) => {
-  ctx.response.body = 'Hello wildfire!';
+  ctx.response.body = "Hello wildfire!";
 });
 
 await app.listen({ port: appConfig.port });
