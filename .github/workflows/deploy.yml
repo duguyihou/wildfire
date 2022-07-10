@@ -24,4 +24,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "duguyihou-wildfire"
-          entrypoint: "./main.ts"
+          entrypoint: "./src/main.ts"
