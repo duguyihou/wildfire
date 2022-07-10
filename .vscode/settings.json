@@ -3,5 +3,10 @@
   "deno.unstable": true,
   "deno.lint": true,
   "editor.formatOnSave": true,
-  "[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" }
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/kong.hou/Documents/Github/wildfire/.github/workflows/deploy.yml"
+  }
 }
