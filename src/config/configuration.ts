@@ -1,5 +1,3 @@
-import { config } from "../../deps.ts";
-
 export const appConfig = {
-  port: Number(await config().PORT),
+  port: Number(Deno.env.get("PORT")) || 8000,
 };
