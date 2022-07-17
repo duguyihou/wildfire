@@ -1,6 +1,6 @@
 import { Application } from "../deps.ts";
 import { appConfig } from "./config/configuration.ts";
-
+import { userRouter } from "./modules/users/index.ts";
 const app = new Application();
 
 // Logger
@@ -18,6 +18,8 @@ app.use(async (ctx, next) => {
   ctx.response.headers.set("X-Response-Time", `${ms}ms`);
 });
 
+app.use(userRouter.routes());
+app.use(userRouter.allowedMethods());
 // Hello wildfire!
 app.use((ctx) => {
   ctx.response.body = "Hello wildfire!";
