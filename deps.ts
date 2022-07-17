@@ -8,3 +8,4 @@ export type {
   Context,
   RouterContext,
 } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+export * as path from "https://deno.land/std@0.138.0/path/mod.ts";

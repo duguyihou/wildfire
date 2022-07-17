@@ -3,12 +3,14 @@ import { appConfig } from "./config/configuration.ts";
 import { userRouter } from "./modules/users/index.ts";
 import logger from "./middlewares/logger.ts";
 import timing from "./middlewares/timing.ts";
+import applyApiMiddleware from "./modules/index.ts";
 
 const app = new Application();
 
 app.use(logger);
 app.use(timing);
 
+app.use(applyApiMiddleware);
 app.use(userRouter.routes());
 app.use(userRouter.allowedMethods());
 
