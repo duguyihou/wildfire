@@ -1,6 +1,10 @@
 import userService from "./user.service.ts";
 import { userContext } from "./user.types.ts";
 
+/**
+ * create a user
+ * @param ctx user context
+ */
 const create = async (ctx: userContext<"/">) => {
   const { name } = await ctx.request.body({ type: "json" }).value;
   ctx.assert(name, 400, "The user info is malformed!");
@@ -9,6 +13,11 @@ const create = async (ctx: userContext<"/">) => {
   ctx.response.body = createdUser;
 };
 
+/**
+ * find user by userId
+ * @param ctx user context
+ * @returns user
+ */
 const findOne = (ctx: userContext<"/:userId">) => {
   const { userId } = ctx.params;
   if (!userId) return;
@@ -18,12 +27,21 @@ const findOne = (ctx: userContext<"/:userId">) => {
   ctx.response.body = user;
 };
 
+/**
+ * find all users
+ * @param ctx user context
+ */
 const findAll = (ctx: userContext<"/">) => {
   const users = userService.findAll();
   ctx.response.status = 200;
   ctx.response.body = users;
 };
 
+/**
+ * update user info
+ * @param ctx user context
+ * @returns updated user
+ */
 const update = (ctx: userContext<"/:userId">) => {
   const { userId } = ctx.params;
   if (!userId) return;
@@ -47,6 +65,11 @@ const update = (ctx: userContext<"/:userId">) => {
   };
 };
 
+/**
+ * delete user by userId
+ * @param ctx user context
+ * @returns deleted user
+ */
 const remove = (ctx: userContext<"/:userId">) => {
   const { userId } = ctx.params;
   if (!userId) return;
