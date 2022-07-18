@@ -1,16 +1,17 @@
-import { path, Router } from "../../deps.ts";
+import { userRouter } from "./users/index.ts";
+import { composeMiddleware, Context, Middleware, Router } from "../../deps.ts";
 
-function getModuleDir(importMeta: ImportMeta): string {
-  return path.resolve(path.dirname(path.fromFileUrl(importMeta.url)));
-}
+const combineRouters = (routers: Router[]) => {
+  const middleware: Middleware<
+    Record<string, unknown>,
+    Context<Record<string, unknown>, Record<string, unknown>>
+  >[] = [];
 
-const applyApiMiddleware = () => {
-  // const router = new Router({ prefix: "/api/v1" });
-  const dir = getModuleDir(import.meta);
-  for (const dirEntry of Deno.readDirSync(dir)) {
-    console.log(dir);
-    console.log(dirEntry.name);
-  }
+  routers.forEach((router) => {
+    middleware.push(router.routes());
+    middleware.push(router.allowedMethods());
+  });
+  return composeMiddleware(middleware);
 };
 
-export default applyApiMiddleware;
+export const routers = combineRouters([userRouter]);
